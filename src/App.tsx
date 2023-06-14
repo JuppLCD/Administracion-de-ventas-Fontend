@@ -2,7 +2,7 @@ function App() {
 	return (
 		<>
 			<div>
-				<h1>Init Proyect</h1>
+				<h1 className='text-3xl font-bold underline'>Init Proyect</h1>
 			</div>
 		</>
 	);
