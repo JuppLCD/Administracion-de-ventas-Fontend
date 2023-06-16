@@ -1,9 +1,11 @@
+import { ChakraProvider } from '@chakra-ui/react';
+
 function App() {
 	return (
 		<>
-			<div>
+			<ChakraProvider>
 				<h1 className='text-3xl font-bold underline'>Init Proyect</h1>
-			</div>
+			</ChakraProvider>
 		</>
 	);
 }
