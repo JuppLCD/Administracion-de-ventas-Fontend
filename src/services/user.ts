@@ -14,7 +14,7 @@ export class UserServices {
 		const data = { email };
 
 		try {
-			const res = await this.axiosInstance.post<{ message: string; newCode: string }>(API_PATH_USER_CODE, data);
+			const res = await this.axiosInstance.post<{ message: string; code: string }>(API_PATH_USER_CODE, data);
 			return res.data;
 		} catch (err) {
 			return errorApiBackend(err);

@@ -7,7 +7,7 @@ import type { FormEvent, ChangeEvent } from 'react';
 import { IErrorBackendApi } from '../types/apiBackend.interface';
 
 function Layout() {
-	const [inputs, setInputs] = useState({ email: 'test@test.com', code: '4nYWNXyFt8' });
+	const [inputs, setInputs] = useState({ email: 'test@test.com', code: 'O68n6TJoYu' });
 	const isError = false;
 	const errorMessage = 'Error';
 
@@ -44,7 +44,7 @@ function Layout() {
 			return;
 		}
 
-		alert(res.message + ' Y el codigo es ->' + (res as { message: string; newCode: string }).newCode);
+		alert(res.message + ' Y el codigo es ->' + (res as { message: string; code: string }).code);
 		console.log('Codigo resivido');
 	};
 
