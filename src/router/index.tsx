@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Home from '../pages/Home';
-import User from '../pages/User';
+import Auth from '../pages/Auth';
 
 export const router = createBrowserRouter([
 	{
@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
 		element: <Home />,
 	},
 	{
-		path: '/user',
-		element: <User />,
+		path: '/auth',
+		element: <Auth />,
 	},
 ]);

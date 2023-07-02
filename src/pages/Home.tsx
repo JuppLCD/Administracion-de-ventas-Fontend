@@ -8,6 +8,8 @@ import { UserServices } from '../services/user';
 import type { FormEvent, ChangeEvent } from 'react';
 import type { IErrorBackendApi } from '../types/apiBackend.interface';
 
+import { redirect } from 'react-router-dom';
+
 function Home() {
 	const [inputs, setInputs] = useState({ email: 'test@test.com', code: 'O68n6TJoYu' });
 	const isError = false;
@@ -31,6 +33,8 @@ function Home() {
 
 		alert(res.message + ' Y el token es ->' + (res as { message: string; token: string }).token);
 		console.log('Login exitoso');
+
+		redirect('/auth');
 	};
 
 	const sendCode = async () => {
@@ -51,7 +55,7 @@ function Home() {
 	};
 
 	return (
-		<Layout>
+		<Layout centerContent>
 			<form onSubmit={handleSubmit}>
 				<FormControl isRequired isInvalid={isError}>
 					<FormLabel>Email</FormLabel>
