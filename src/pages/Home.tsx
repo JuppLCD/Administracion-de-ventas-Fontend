@@ -8,12 +8,14 @@ import { UserServices } from '../services/user';
 import type { FormEvent, ChangeEvent } from 'react';
 import type { IErrorBackendApi } from '../types/apiBackend.interface';
 
-import { redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
 	const [inputs, setInputs] = useState({ email: 'test@test.com', code: 'O68n6TJoYu' });
 	const isError = false;
 	const errorMessage = 'Error';
+
+	const navigate = useNavigate();
 
 	const handleChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -34,7 +36,8 @@ function Home() {
 		alert(res.message + ' Y el token es ->' + (res as { message: string; token: string }).token);
 		console.log('Login exitoso');
 
-		redirect('/auth');
+		localStorage.setItem('token', (res as { message: string; token: string }).token);
+		navigate('/auth', { replace: true });
 	};
 
 	const sendCode = async () => {
@@ -56,6 +59,9 @@ function Home() {
 
 	return (
 		<Layout centerContent>
+			<Button as={Link} to='/auth' bg={'green.400'} mb={10}>
+				Auth ModeDev
+			</Button>
 			<form onSubmit={handleSubmit}>
 				<FormControl isRequired isInvalid={isError}>
 					<FormLabel>Email</FormLabel>
