@@ -5,11 +5,14 @@ import Auth from '../pages/Auth';
 
 import actionHome from './actions/home';
 
+import ErrorBoundary from '../components/ErrorBoundary';
+
 export const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Home />,
 		action: actionHome,
+		errorElement: <ErrorBoundary />,
 	},
 	{
 		path: '/auth',
