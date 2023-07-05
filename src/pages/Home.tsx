@@ -1,10 +1,13 @@
 import { Button, ButtonGroup, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, useActionData } from 'react-router-dom';
 import Layout from '../layout';
 
 function Home() {
-	const isError = false;
-	const errorMessage = 'Error';
+	let actionData = useActionData() as undefined | { [key: string]: string };
+
+	if (!actionData) {
+		actionData = {};
+	}
 
 	return (
 		<Layout centerContent>
@@ -12,15 +15,15 @@ function Home() {
 				Auth ModeDev
 			</Button>
 			<Form method='POST'>
-				<FormControl isRequired isInvalid={isError}>
+				<FormControl isRequired isInvalid={!!actionData?.email}>
 					<FormLabel>Email</FormLabel>
 					<Input placeholder='Put your email here...' defaultValue='test@test.com' required type='email' name='email' />
-					{isError && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
+					{!!actionData?.email && <FormErrorMessage>{actionData?.email}</FormErrorMessage>}
 				</FormControl>
-				<FormControl mt='3' isInvalid={isError}>
+				<FormControl mt='3' isInvalid={!!actionData?.code}>
 					<FormLabel>Code</FormLabel>
 					<Input placeholder='Put the code we sent you here' name='code' />
-					{isError && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
+					{!!actionData?.code && <FormErrorMessage>{actionData?.code}</FormErrorMessage>}
 				</FormControl>
 
 				<ButtonGroup mt={5}>

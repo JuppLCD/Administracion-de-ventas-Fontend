@@ -17,6 +17,12 @@ export default async function actionHome({ request }: ActionFunctionArgs) {
 	};
 
 	if (intent === 'login') {
+		if (data.email.trim() === '') {
+			return json({ email: 'Falta email' });
+		}
+		if (data.code.trim() === '') {
+			return json({ code: 'Falta code' });
+		}
 		let res = await UserServices.login(data.email, data.code);
 
 		if ((res as IErrorBackendApi).error) {
@@ -35,17 +41,13 @@ export default async function actionHome({ request }: ActionFunctionArgs) {
 
 	if (intent === 'send_code') {
 		if (data.email.trim() === '') {
-			alert('Falta email');
-			return null;
+			return json({ email: 'Falta email' });
 		}
 		let res = await UserServices.generateCode(data.email);
 
 		if ((res as IErrorBackendApi).error) {
 			res = res as IErrorBackendApi;
-
-			alert('Error');
-			console.log(res);
-			return null;
+			throw json({ message: res.message, error: res.error }, { status: res.statusCode });
 		}
 
 		res = res as { message: string; code: string };
