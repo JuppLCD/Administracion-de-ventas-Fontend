@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { IErrorBackendApi } from '../types/apiBackend.interface';
+import { IErrorBackendApi } from '../types/backend/error.interface';
 
 export function errorApiBackend(err: unknown) {
 	console.log(err);
