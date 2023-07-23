@@ -1,16 +1,22 @@
 import axios from 'axios';
 
-import { API_BACKEND_URL, API_PATH_USER_CODE, API_PATH_USER_LOGIN } from '../config';
+import { API_PATH_USER, API_PATH_USER_CODE, API_PATH_USER_LOGIN, API_PATH_USER_VALIDATE_TOKEN } from '../config';
 
 import { errorApiBackend } from './utils';
 
 export class UserServices {
-	static axiosInstance = axios.create({
-		baseURL: API_BACKEND_URL,
+	axiosInstance = axios.create({
+		baseURL: API_PATH_USER,
 		headers: { Accept: 'application/json' },
 	});
 
-	static generateCode = async (email: string) => {
+	static validateToken = async (token: string) => {
+		return axios.get<{ token: string }>(API_PATH_USER_VALIDATE_TOKEN, {
+			headers: { Accept: 'application/json', Authorization: token },
+		});
+	};
+
+	generateCode = async (email: string) => {
 		const data = { email };
 
 		try {
@@ -21,7 +27,7 @@ export class UserServices {
 		}
 	};
 
-	static login = async (email: string, code: string) => {
+	login = async (email: string, code: string) => {
 		const data = { email, code };
 
 		try {
