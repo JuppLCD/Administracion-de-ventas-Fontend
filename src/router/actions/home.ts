@@ -1,11 +1,12 @@
 import { json, redirect } from 'react-router-dom';
 
-import { UserServices } from '../../services/user';
-
 import type { ActionFunctionArgs } from 'react-router-dom';
-import type { IErrorBackendApi } from '../../types/apiBackend.interface';
+import type { IErrorBackendApi } from '@/types/backend/error.interface';
 
-export default async function actionHome({ request }: ActionFunctionArgs) {
+import useBackendServices from '@/hooks/useBackendServices';
+
+export default async function ActionHome({ request }: ActionFunctionArgs) {
+	const { UserServices } = useBackendServices();
 	const formData = await request.formData();
 
 	const intent = formData.get('intent');
