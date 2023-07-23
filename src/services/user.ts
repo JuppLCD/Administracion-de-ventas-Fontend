@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_PATH_USER, API_PATH_USER_CODE, API_PATH_USER_LOGIN, API_PATH_USER_VALIDATE_TOKEN } from '../config';
+import { API_PATH_USER, API_PATH_USER_CODE, API_PATH_USER_LOGIN, API_PATH_USER_VALIDATE_TOKEN } from '@/config';
 
 import { errorApiBackend } from './utils';
 

@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { Form, Link, useActionData } from 'react-router-dom';
-import Layout from '../layout';
+import Layout from '@/layout';
 
 function Home() {
 	let actionData = useActionData() as undefined | { [key: string]: string };

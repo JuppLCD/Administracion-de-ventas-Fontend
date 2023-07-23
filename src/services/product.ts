@@ -1,9 +1,9 @@
-import { API_PATH_PRODUCT, API_PATH_PRODUCT_GET_BY_CATEGORY, STORE_PATH } from '../config';
+import { API_PATH_PRODUCT, API_PATH_PRODUCT_GET_BY_CATEGORY, STORE_PATH } from '@/config';
 
 import { AxiosAuthInstance } from './axios';
 import { errorApiBackend } from './utils';
 
-import type { IProduct, IProductToStore, IProductToUpdate } from '../types/backend/product.interface';
+import type { IProduct, IProductToStore, IProductToUpdate } from '@/types/backend/product.interface';
 
 export class ProductServices extends AxiosAuthInstance {
 	constructor(token: string) {

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import Home from '../pages/Home';
-import Auth from '../pages/Auth';
+import Home from '@/pages/Home';
+import Auth from '@/pages/Auth';
 
 import actionHome from './actions/home';
 
-import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export const router = createBrowserRouter([
 	{

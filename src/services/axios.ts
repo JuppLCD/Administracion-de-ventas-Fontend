@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { API_BACKEND_URL } from '../config';
+import { API_BACKEND_URL } from '@/config';
 
 export class AxiosAuthInstance {
 	protected authAxios: AxiosInstance;

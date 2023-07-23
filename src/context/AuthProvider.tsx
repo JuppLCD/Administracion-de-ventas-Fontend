@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { KEY_LOCAL_STORAGE_TOKEN } from '../config';
+import { KEY_LOCAL_STORAGE_TOKEN } from '@/config';
 import { AuthContext } from './AuthContext';
-import { UserServices } from '../services/user';
+import { UserServices } from '@/services/user';
 
 interface Props {
 	children: JSX.Element | JSX.Element[];
@@ -21,7 +21,7 @@ const AuthProvider = ({ children }: Props) => {
 
 					if (res.status === 204) {
 						setIsAuth(true);
-						settoken(localToken);
+						settoken(res.data.token);
 					} else {
 						localStorage.removeItem(KEY_LOCAL_STORAGE_TOKEN);
 					}

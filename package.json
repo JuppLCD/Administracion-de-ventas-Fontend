@@ -1,7 +1,7 @@
 {
 	"name": "administracion-de-ventas-fontend",
 	"private": true,
-	"version": "0.0.18",
+	"version": "0.0.19",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",

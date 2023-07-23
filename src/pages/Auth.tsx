@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import Layout from '../layout';
+import Layout from '@/layout';
 
-import ProductsTabPanel from '../components/TabPanel/Products';
+import ProductsTabPanel from '@/components/TabPanel/Products';
 
 function Auth() {
 	return (
