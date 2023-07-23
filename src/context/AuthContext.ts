@@ -1,17 +1,9 @@
 import { createContext } from 'react';
 
-interface Auth {
+interface IAuthContext {
 	isAuth: boolean;
 	token: string;
 	logout: () => void;
 }
 
-const AuthContextValueDefoult: Auth = {
-	isAuth: false,
-	token: '',
-	logout: () => {
-		//
-	},
-};
-
-export const AuthContext = createContext<Auth>(AuthContextValueDefoult);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
