@@ -11,5 +11,5 @@ export default defineConfig({
 		},
 	},
 	plugins: [react()],
-	base: '/Administracion-de-ventas-Fontend/',
+	base: '/',
 });
