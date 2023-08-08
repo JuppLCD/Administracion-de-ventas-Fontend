@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { KEY_LOCAL_STORAGE_TOKEN } from '@/config';
+
 import { AuthContext } from './AuthContext';
+
 import { UserServices } from '@/services/user';
 
 interface Props {
@@ -10,7 +12,7 @@ interface Props {
 
 const AuthProvider = ({ children }: Props) => {
 	const [isAuth, setIsAuth] = useState(false);
-	const [token, settoken] = useState('');
+	const [token, setToken] = useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -21,7 +23,7 @@ const AuthProvider = ({ children }: Props) => {
 
 					if (res.status === 204) {
 						setIsAuth(true);
-						settoken(res.data.token);
+						setToken(res.data.token);
 					} else {
 						localStorage.removeItem(KEY_LOCAL_STORAGE_TOKEN);
 					}
@@ -35,10 +37,14 @@ const AuthProvider = ({ children }: Props) => {
 	const logout = () => {
 		localStorage.removeItem(KEY_LOCAL_STORAGE_TOKEN);
 		setIsAuth(false);
-		settoken('');
+		setToken('');
 	};
 
-	return <AuthContext.Provider value={{ isAuth, token, logout }}>{children}</AuthContext.Provider>;
+	const updateToken = (newToken: string) => {
+		setToken(newToken);
+	};
+
+	return <AuthContext.Provider value={{ isAuth, token, logout, updateToken }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
