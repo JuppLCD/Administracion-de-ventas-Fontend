@@ -4,11 +4,15 @@ import { Box, Heading, Text, Button } from '@chakra-ui/react';
 
 function ErrorBoundary() {
 	const error = useRouteError();
-
+	console.log('Error (ErrorBoundary) -|- ', error);
 	let err = { status: 418, title: 'Error Desconocido', message: 'Ocurrio un error de algun tipo' };
 
 	if (isRouteErrorResponse(error)) {
-		err = { status: error.status, title: error.data.error ?? error.statusText, message: error.data.message };
+		err = {
+			status: error.status,
+			title: error.data.error ?? error.statusText,
+			message: error.data.message,
+		};
 	}
 
 	return (
