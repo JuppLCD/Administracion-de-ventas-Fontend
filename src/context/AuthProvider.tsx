@@ -23,7 +23,7 @@ const AuthProvider = ({ children }: Props) => {
 
 					if (res.status === 204) {
 						setIsAuth(true);
-						setToken(res.data.token);
+						updateToken(res.data.token);
 					} else {
 						localStorage.removeItem(KEY_LOCAL_STORAGE_TOKEN);
 					}
@@ -41,6 +41,7 @@ const AuthProvider = ({ children }: Props) => {
 	};
 
 	const updateToken = (newToken: string) => {
+		localStorage.setItem(KEY_LOCAL_STORAGE_TOKEN, newToken);
 		setToken(newToken);
 	};
 
