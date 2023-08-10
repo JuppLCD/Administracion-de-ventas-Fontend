@@ -1,12 +1,13 @@
 import { json, redirect } from 'react-router-dom';
 
-import type { ActionFunctionArgs } from 'react-router-dom';
-import type { IErrorBackendApi } from '@/types/backend/error.interface';
+import { UserServices } from '@/services/user';
 
-import useBackendServices from '@/hooks/useBackendServices';
+import { ErrorBackendApi } from '@/services/utils';
+
+import type { ActionFunctionArgs } from 'react-router-dom';
 
 export default async function ActionHome({ request }: ActionFunctionArgs) {
-	const { UserServices } = useBackendServices();
+	const UserService = new UserServices();
 	const formData = await request.formData();
 
 	const intent = formData.get('intent');
@@ -24,19 +25,14 @@ export default async function ActionHome({ request }: ActionFunctionArgs) {
 		if (data.code.trim() === '') {
 			return json({ code: 'Falta code' });
 		}
-		let res = await UserServices.login(data.email, data.code);
 
-		if ((res as IErrorBackendApi).error) {
-			res = res as IErrorBackendApi;
+		const res = await UserService.login(data.email, data.code);
+
+		if (res instanceof ErrorBackendApi) {
 			throw json({ message: res.message, error: res.error }, { status: res.statusCode });
 		}
 
-		res = res as { message: string; token: string };
-
-		alert(res.message + ' Y el token es ->' + res.token);
-		console.log('Login exitoso');
-
-		localStorage.setItem('token', res.token);
+		console.log(res.message + ' -|- El token es ->' + res.token);
 		return redirect('/auth');
 	}
 
@@ -44,17 +40,13 @@ export default async function ActionHome({ request }: ActionFunctionArgs) {
 		if (data.email.trim() === '') {
 			return json({ email: 'Falta email' });
 		}
-		let res = await UserServices.generateCode(data.email);
+		const res = await UserService.generateCode(data.email);
 
-		if ((res as IErrorBackendApi).error) {
-			res = res as IErrorBackendApi;
+		if (res instanceof ErrorBackendApi) {
 			throw json({ message: res.message, error: res.error }, { status: res.statusCode });
 		}
 
-		res = res as { message: string; code: string };
-
-		alert(res.message + ' Y el codigo es ->' + res.code);
-		console.log('Codigo resivido');
+		console.log(res.message + ' -|- El codigo es ->' + res.code);
 		return null;
 	}
 
