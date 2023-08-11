@@ -1,4 +1,4 @@
-import { json, redirect } from 'react-router-dom';
+import { json } from 'react-router-dom';
 
 import { UserServices } from '@/services/user';
 
@@ -32,8 +32,7 @@ export default async function ActionHome({ request }: ActionFunctionArgs) {
 			throw json({ message: res.message, error: res.error }, { status: res.statusCode });
 		}
 
-		console.log(res.message + ' -|- El token es ->' + res.token);
-		return redirect('/auth');
+		return json({ token: res.token });
 	}
 
 	if (intent === 'send_code') {
