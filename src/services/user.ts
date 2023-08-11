@@ -11,9 +11,14 @@ export class UserServices {
 	});
 
 	static validateToken = async (token: string) => {
-		return axios.get<{ token: string }>(API_PATH_USER_VALIDATE_TOKEN, {
-			headers: { Accept: 'application/json', Authorization: token },
-		});
+		try {
+			const res = await axios.get<{ token: string }>(API_PATH_USER_VALIDATE_TOKEN, {
+				headers: { Accept: 'application/json', Authorization: token },
+			});
+			return res.data;
+		} catch (err) {
+			return errorApiBackend(err);
+		}
 	};
 
 	generateCode = async (email: string) => {

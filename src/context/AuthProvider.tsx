@@ -5,6 +5,7 @@ import { KEY_LOCAL_STORAGE_TOKEN } from '@/config';
 import { AuthContext } from './AuthContext';
 
 import { UserServices } from '@/services/user';
+import { ErrorBackendApi } from '@/services/utils';
 
 interface Props {
 	children: JSX.Element | JSX.Element[];
@@ -21,11 +22,11 @@ const AuthProvider = ({ children }: Props) => {
 				if (localToken !== null) {
 					const res = await UserServices.validateToken(localToken);
 
-					if (res.status === 204) {
-						setIsAuth(true);
-						updateToken(res.data.token);
-					} else {
+					if (res instanceof ErrorBackendApi) {
 						localStorage.removeItem(KEY_LOCAL_STORAGE_TOKEN);
+					} else {
+						setIsAuth(true);
+						updateToken(res.token);
 					}
 				}
 			} catch (err) {
